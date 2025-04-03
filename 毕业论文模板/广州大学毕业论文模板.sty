@@ -20,7 +20,7 @@ hyperindex, plainpages=false]{hyperref}
 \RequirePackage{titletoc}
 \RequirePackage{fancyhdr}
 \RequirePackage{caption}
-\RequirePackage{xeCJK}
+\RequirePackage[BoldFont,SlantFont,CJKchecksingle]{xeCJK}
 \RequirePackage{ctex}
 \RequirePackage{xcolor}
 
@@ -97,18 +97,9 @@ hyperindex, plainpages=false]{hyperref}
   Extension = .ttf         % 字体文件的扩展名
 ]
 
-%\newfontfamily\KaiTi{KaiTi_GB2312}[    % 楷体_GB2312
-%  Path      = ./fonts/,          % 字体文件所在的路径（当前目录）
-%  Extension = .ttf,         % 字体文件的扩展名
-%  FakeBold  = 1.5           % 没粗体，只能伪粗体
-%]
-
-\newfontfamily\KaiTi{simkai}[    % 楷体
-  Path      = ./fonts/,          % 字体文件所在的路径（当前目录）
-  Extension = .ttf         % 字体文件的扩展名
-]
-
+\newcommand{\KaiTi}{\kaishu}
 \newfontfamily{\NewRoman}{Times New Roman} %英文专用字体
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -182,7 +173,7 @@ hyperindex, plainpages=false]{hyperref}
             \\
         }
         { 
-			\SongTi\fontsize{12}{23}\setlength{\baselineskip}{23pt}\selectfont%
+			\SongTi\fontsize{12}{23}\selectfont%
 			\@major 专业 \@class 班 \@author \\ % 专业班级 作者
 			指导教师: \@supervisor \\ % 指导老师
 			\vspace{2em}
@@ -263,10 +254,10 @@ hyperindex, plainpages=false]{hyperref}
 \end{textblock*}
 
 
-{\KaiTi\fontsize{26}{57}\selectfont\vspace*{57pt} \textbf{本\ 科\ 毕\ 业\ 论\ 文（设计）}}
+{\fontsize{26}{57}\selectfont\vspace*{57pt} \KaiTi\textbf{本\ 科\ 毕\ 业\ 论\ 文（设计）}}
 
 \vspace*{3.5cm}
-	\KaiTi\fontsize{16}{24}\selectfont % 指定字体为楷体三号
+	\fontsize{16}{24}\selectfont\KaiTi % 指定字体为楷体三号
 		
 \begin{tabular}{r@{}>{\centering\arraybackslash}p{3.80in}}
 	\ifx\@title\@empty
