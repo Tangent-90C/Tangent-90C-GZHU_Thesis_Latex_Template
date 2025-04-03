@@ -26,3 +26,6 @@
 
 ![image](https://github.com/user-attachments/assets/90da7290-dc80-4e0a-bc67-67e3fa06a457)
 
+
+# 注意事项
+要使用xelatex编译，并且使用biber后端
