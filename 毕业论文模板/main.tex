@@ -1,36 +1,28 @@
 %!TEX program = xelatex
 
-
-% 要使用biber后端
+% 要使用biber后端（在TexStudio上一定要设置这个，否则无法编译参考文献）
 % 要使用xelatex编译
-\documentclass[a4paper,12pt]{article}%A4纸，正文为小四号字，对应12pt
 
-% 设置字体
-\usepackage{fontspec}
-\usepackage[BoldFont,SlantFont,CJKchecksingle]{xeCJK}
-\usepackage{ctex}
- 
+% 注意事项：
+% 如果在overleaf上需要使用严格标准的“黑体”、“宋体”、“楷体”字体，需自行下载
+% SimHei.ttf （Windows 黑体字）
+% SimSun.ttf （Windows 宋体字）
+% SimKai.ttf （Windows 楷体字）
+% 并上传到文件夹fonts下
 
-\setCJKmainfont{SimSun}[Path=./fonts/, Extension=.ttf]
-\setCJKmonofont{SimSun}[Path=./fonts/, Extension=.ttf]% 设置缺省中文字体为宋体
+\documentclass{广州大学毕业论文模板} 
 
 \usepackage{diagbox}
 \usepackage{multido}
 \usepackage{float}
 \usepackage{algorithmic}
-\usepackage{listings}
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{xcolor}
 
 
-
 \usepackage[backend=biber,style=gb7714-2015]{biblatex}
 \addbibresource{reference.bib} % 替换为你的 .bib 文件
-
-
-\usepackage{广州大学毕业论文模板}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -45,8 +37,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \begin{document}
+%\textbf{\fontsetresult} % 查看字体选择结果 debug用
 
 \input{封面与摘要.tex}
 
