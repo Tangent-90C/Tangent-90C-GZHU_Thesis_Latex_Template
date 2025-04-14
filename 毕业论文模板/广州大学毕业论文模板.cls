@@ -472,7 +472,7 @@
 
 \vfill
 {\fontsize{16}{24}\selectfont\kaishuGB{教\ 务\ 处\ 制}}
-\vspace{2.8cm}
+\vspace{2.5cm}
 
 \end{center}
 \end{titlepage}
