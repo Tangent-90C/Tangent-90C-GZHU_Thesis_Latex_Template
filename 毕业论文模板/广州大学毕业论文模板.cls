@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e} % 声明需要的 LaTeX 版本
-\ProvidesClass{广州大学毕业论文模板}[2025/04/12 v1.1 广州大学毕业论文模板] % 定义文档类名称和版本
+\ProvidesClass{广州大学毕业论文模板}[2025/04/14 v1.2 广州大学毕业论文模板] % 定义文档类名称和版本
 
 
 \RequirePackage{ifplatform}
@@ -42,16 +42,15 @@
 \RequirePackage{caption}
 \RequirePackage{xcolor}
 \RequirePackage{listings}
-
+\RequirePackage{changepage}
 
 
 %\headheight=10.26em
-\setlength{\headheight}{0.39in}  % 页眉高度
+\setlength{\headheight}{0.59in}     %{0.39in}  % 页眉高度
 %\setlength{\headsep}{10pt}     % 页眉与正文的间距
 \setlength{\footskip}{0.69in}    % 页脚基线到页面底部的距离
 \setlength{\baselineskip}{23pt} % 直接设置行距为 23pt
-% \renewcommand{\baselinestretch}{23pt}
-% \renewcommand{\baselinestretch}{1.6}%要求行距为23磅，大约为这个行距参数。
+% \renewcommand{\baselinestretch}{23pt} %要求行距为23磅，大约为这个行距参数。
 
 
 
@@ -59,7 +58,7 @@
 \fancyhead[L]{}
 
 \renewcommand{\headrulewidth}{0pt}
-\renewcommand\contentsname{目\hspace{1em}录}
+\renewcommand\contentsname{{\heiti\fontsize{18}{23}\selectfont 目录}}
 \renewcommand\refname{参考文献}
 \renewcommand\indexname{索\hspace{1em}引}
 \renewcommand\figurename{图}
@@ -193,6 +192,15 @@
     {kaishu}
     {\CJKfontspec{FandolKai}}
     {FandolKai}
+
+    % 加载楷体_GB2312
+    \setfont
+    {./fonts/KaiTi_GB2312.ttf}
+    {\CJKfontspec[Path=./fonts/]{KaiTi_GB2312}}
+    {KaiTi_GB2312}
+    {kaishuGB}
+    {\CJKfontspec{FandolKai}}
+    {FandolKai}
 \fi
 
 
@@ -251,7 +259,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置页面格式
 
-\RequirePackage[top=1in,bottom=1in,left=1.18in,right=1.02in]{geometry}%上下页边距为 1 in、左边距为 1.18 in、右边距为 1.02 in
+\RequirePackage[top=1in,bottom=1in,left=1.18in,right=1.02in]{geometry}
+% 虽然教务处要求上下页边距为 2cm、左边距为 2.7cm、右边距为 2.5cm
+% 但是学校发的模板的上下页边距为 1 in、左边距为 1.18 in、右边距为 1.02 in
 \pagestyle{fancy}
 \fancyhf{} % 清空默认的页眉和页脚
 \fancyfoot[R]{\thepage} % 在页脚右侧添加页码
@@ -398,62 +408,70 @@
 	\includegraphics[height=0.67in, width=2.35in]{./imgs/gzhu.jpg}\\
 \end{textblock*}
 
+%\vspace*{57pt}
+\vspace*{67pt}
+{\fontsize{26}{57}\selectfont\ \bf\kaishuGB{本\ \ 科\ \ 毕\ \ 业\ \ 论\ \ 文（设计）}}
 
-{\fontsize{26}{57}\selectfont\vspace*{57pt} \bf\kaishu{本\ 科\ 毕\ 业\ 论\ 文（设计）}}
+%\vspace*{3.5cm}
+\vspace*{3.7cm}
 
-\vspace*{3.5cm}
-	\fontsize{16}{24}\selectfont\kaishu % 指定字体为楷体三号
-		
-\begin{tabular}{r@{}>{\centering\arraybackslash}p{3.80in}}
-	\ifx\@title\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 课题名称} & \@title\\[-0.8ex]
-	\cline{2-2}
-	\fi
-	\ifx\@school\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 学\hfill 院} & \@school \\[-0.8ex]
-	\cline{2-2}
-	\fi
-	\ifx\@xibie\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 系\hfill 别} & \@xibie \\[-0.8ex]
-	\cline{2-2}
-	\fi
-	\ifx\@major\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 专\hfill 业} & \@major \\[-0.8ex]
-	\cline{2-2}
-	\fi
-	\ifx\@class\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 班级名称} & \@class \\[-0.8ex]
-	\cline{2-2}
-	\fi
-	\ifx\@author\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 学生姓名} & \@author \\[-0.8ex]
-	\cline{2-2}
-	\fi
-	\ifx\@studentnumber\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 学\hfill 号} & \@studentnumber \\[-0.8ex]
-	\cline{2-2}
-	\fi
-	\ifx\@supervisor\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 指导教师} & \@supervisor \\[-0.8ex]
-	\cline{2-2}
-	\fi
-	\ifx\@date\@empty
-	\else
-	{\fontsize{18}{27}\selectfont 完成日期} & \@date \\[-0.8ex]
-	\cline{2-2}
-	\fi
-\end{tabular}
+{
+
+\begin{adjustwidth}{54pt}{0in}
+    \fontsize{16}{24}\selectfont\kaishuGB % 指定字体为楷体三号
+    \begin{tabular}{r@{}>{\centering\arraybackslash}p{3.80in}}
+    
+    	\ifx\@title\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 课题名称} & \@title\\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    	\ifx\@school\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 学\hfill 院} & \@school \\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    	\ifx\@xibie\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 系\hfill 别} & \@xibie \\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    	\ifx\@major\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 专\hfill 业} & \@major \\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    	\ifx\@class\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 班级名称} & \@class \\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    	\ifx\@author\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 学生姓名} & \@author \\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    	\ifx\@studentnumber\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 学\hfill 号} & \@studentnumber \\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    	\ifx\@supervisor\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 指导教师} & \@supervisor \\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    	\ifx\@date\@empty
+    	\else
+    	{\fontsize{18}{27}\selectfont 完成日期} & \@date \\%[-0.8ex]
+    	\cline{2-2}
+    	\fi
+    \end{tabular}
+\end{adjustwidth}
+}
 
 \vfill
-{\kaishu{教\ 务\ 处\ 制}}
+{\fontsize{16}{24}\selectfont\kaishuGB{教\ 务\ 处\ 制}}
 \vspace{2.8cm}
 
 \end{center}
