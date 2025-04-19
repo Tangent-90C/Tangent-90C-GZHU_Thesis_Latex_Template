@@ -43,6 +43,9 @@
 \RequirePackage{xcolor}
 \RequirePackage{listings}
 \RequirePackage{changepage}
+\RequirePackage{algorithm}
+\RequirePackage{algorithmic}
+
 
 
 %\headheight=10.26em
@@ -63,6 +66,10 @@
 \renewcommand\indexname{索\hspace{1em}引}
 \renewcommand\figurename{图}
 \renewcommand\tablename{表}
+\floatname{algorithm}{算法}
+
+
+
 \titlecontents{section}[0pt]{\vspace{.5\baselineskip}\bfseries}
 {\thecontentslabel\quad}{}
 {\hspace{.5em}\titlerule*[1em]{$\cdot$}\contentspage}
@@ -174,7 +181,8 @@
     {songti}
     {\CJKfontspec{FandolSong}}
     {FandolSong}
-    
+
+
     % 加载黑体
     \setfont
     {./fonts/SimHei.ttf}
@@ -204,8 +212,6 @@
 \fi
 
 
-
-
 \setmainfont{Times New Roman}
 \newfontfamily{\NewRoman}{Times New Roman} %英文专用字体
 
@@ -232,11 +238,15 @@
 % \newfontfamily\songti{SimSun}[Path=./fonts/]
 % \newfontfamily\kaishu{SimKai}[Path=./fonts/]
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 设置注释
+\renewcommand{\algorithmiccomment}[1]{\hfill $\triangleright$ #1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -329,7 +339,7 @@
         }
         { 
 			\songti\fontsize{12}{23}\selectfont%
-			\@major 专业 \@class 班 \@author \\ % 专业班级 作者
+			\@major \hspace{1ex} \@class \hspace{1ex} \@author \\ % 专业班级 作者
 			指导教师: \@supervisor \\ % 指导老师
 			\vspace{2em}
 		}
@@ -342,14 +352,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置图表文字
-\captionsetup{
-	font={small},       % 设置字体大小为 small（5 号字）
-	labelsep=space,     % 用空格做间隔符
-	%font={SimSun},      % 设置字体为宋体
-	%labelfont=bf,       % 设置标签（如 "Figure 1:"）为加粗
-	%justification=raggedright, % 标题左对齐
-	%singlelinecheck=false % 防止单行标题居中
+\DeclareCaptionFormat{custom}
+{
+    %\textbf{#1#2} \ {\songti\small #3}
+    {\songti\fontsize{10.5pt}{23pt}\selectfont #1 \  #3}
 }
+\captionsetup{format=custom}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
