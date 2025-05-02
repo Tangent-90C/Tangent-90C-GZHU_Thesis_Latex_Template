@@ -7,27 +7,36 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置类和根据操作系统加载字体
 
-\LoadClass[12pt, a4paper,\CurrentOption]{article}
+\LoadClass[12pt, a4paper,\CurrentOption]{article} % 这里设置的12pt字号没有用，会被后面的ctex宏包覆盖的
 \RequirePackage[BoldFont,SlantFont,CJKchecksingle,AutoFakeBold=true, AutoFakeSlant=true]{xeCJK} % xeCJK的导入需要在ctex之前
 
 \ifwindows
   \newcommand{\fontsetresult}{检测到是Windows系统，使用 fontset=windows}
-  \RequirePackage[fontset=windows]{ctex}
+  \RequirePackage[fontset=windows]{ctex} % 这个宏在导入时会覆盖默认字体大小为10.5pt，即五号字体，因此后面需要调整字体大小
 \else
   \newcommand{\fontsetresult}{检测到非Windows系统，使用 fontset=none}
-  \RequirePackage[fontset=none]{ctex}
+  \RequirePackage[fontset=none]{ctex} % 这个宏在导入时会覆盖默认字体大小为10.5pt，即五号字体，因此后面需要调整字体大小
 \fi
 
-\AtBeginDocument{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2025/05/02 更新，设置正文部分和参考文献部分的字体字号为12pt，即小四
+\RequirePackage[backend=biber,style=gb7714-2015]{biblatex}
+\AtBeginBibliography{
     \zihao{-4} % 这个指令也能设置字号为小四，即12pt，这个是ctex宏包的指令
-    % \fontsize{12pt}{23pt}\selectfont % 这个也能设置字体行距，和上面二选一就行
+    %\fontsize{12pt}{23pt}\selectfont % 这个也能设置字体行距，和上面二选一就行
     \setlength{\baselineskip}{23pt}  % 直接设置行距为 23pt
 }
-
+\AtBeginDocument{
+    \zihao{-4} % 这个指令也能设置字号为小四，即12pt，这个是ctex宏包的指令
+    %\fontsize{12pt}{23pt}\selectfont % 这个也能设置字体行距，和上面二选一就行
+    \setlength{\baselineskip}{23pt}  % 直接设置行距为 23pt
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{ifthen}
 \RequirePackage{amsmath, amsfonts, mathrsfs, latexsym}
 \RequirePackage{graphicx}
@@ -58,8 +67,6 @@
 \setlength{\headheight}{0.59in}     %{0.39in}  % 页眉高度
 %\setlength{\headsep}{10pt}     % 页眉与正文的间距
 \setlength{\footskip}{0.69in}    % 页脚基线到页面底部的距离
-\setlength{\baselineskip}{23pt} % 直接设置行距为 23pt
-% \renewcommand{\baselinestretch}{23pt} %要求行距为23磅，大约为这个行距参数。
 
 
 
