@@ -1,5 +1,23 @@
-# Tangent-90C-GZHU_Thesis_Latex_Template
-广州大学毕业论文Latex模板（自制的）
+# 广州大学毕业论文Latex模板（自制的）
+
+---
+**2025/05/02 重要更新**
+修复了全局字体被覆盖回 五号 字体的BUG
+
+目前发现Latex的ctex宏包存在一个BUG，不论之前导入模板时设置的字体大小多大，加载ctex宏包时都会将字体大小覆盖回五号字，即10.5pt，而学校要求的是小四号字，即12pt。
+<img src="https://github.com/user-attachments/assets/cbb38950-c6c5-45d1-bad4-708aa51f972a" width="800px" >
+
+请使用了旧模板的同学们更新模板，避免字体大小错误带来的影响。
+
+只需将新版本的模板文件`广州大学毕业论文模板.cls`覆盖到你的项目中即可。[广州大学毕业论文模板.cls](https://github.com/Tangent-90C/Tangent-90C-GZHU_Thesis_Latex_Template/blob/main/%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E6%A8%A1%E6%9D%BF/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E6%A8%A1%E6%9D%BF.cls)
+
+覆盖完后重新编译，因为字体大小被修改回12pt的缘故，你的论文应该会多出几页。
+
+对字体大小还不放心的同学，可以用微信自带的截图软件，在屏幕和PDF缩放都是100%的情况下将字体从左上角框到右下角，如果在16x16附近就没问题，或者和Word中同等大小的字体对比像素大小。
+<img src="https://github.com/user-attachments/assets/876c1be8-4f0b-467a-b81c-209a0daf6097" width="400px" >
+
+---
+
 本Latex模板可生成满足教务处规定的**毕业论文（设计）计算机排版格式**论文，具体修改细节如：
 
 - 题目为黑体三号字，正文用宋体小四号字
@@ -31,3 +49,6 @@
 
 # 注意事项
 要使用xelatex编译，并且使用biber后端
+
+# 使用方法
+自己部署了Latex环境的就略了，对Latex了解不多的建议在这个网站上上传本模板，即`毕业论文模板`中的内容：https://cn.overleaf.com/
