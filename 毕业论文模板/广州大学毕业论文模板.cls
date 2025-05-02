@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e} % 声明需要的 LaTeX 版本
-\ProvidesClass{广州大学毕业论文模板}[2025/04/14 v1.2 广州大学毕业论文模板] % 定义文档类名称和版本
+\ProvidesClass{广州大学毕业论文模板}[2025/05/02 v1.3 广州大学毕业论文模板] % 定义文档类名称和版本
 
 
 \RequirePackage{ifplatform}
@@ -17,6 +17,12 @@
   \newcommand{\fontsetresult}{检测到非Windows系统，使用 fontset=none}
   \RequirePackage[fontset=none]{ctex}
 \fi
+
+\AtBeginDocument{
+    \zihao{-4} % 这个指令也能设置字号为小四，即12pt，这个是ctex宏包的指令
+    % \fontsize{12pt}{23pt}\selectfont % 这个也能设置字体行距，和上面二选一就行
+    \setlength{\baselineskip}{23pt}  % 直接设置行距为 23pt
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -489,5 +495,4 @@
 
 
 \endinput
-
 
