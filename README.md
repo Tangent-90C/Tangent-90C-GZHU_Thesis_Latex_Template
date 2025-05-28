@@ -47,13 +47,14 @@
 此外生成的参考文献格式为国家标准参考文献著录新格式（GB/T 7714-2015）
 
 # 效果图
-![image](https://github.com/user-attachments/assets/dd662a4d-19a1-48ed-9a96-1ea789190881)
+![image](https://github.com/user-attachments/assets/dd6f4e93-13b8-4ecb-a16a-7029247aea4f)
 
+![image](https://github.com/user-attachments/assets/d6718004-ab5f-4e3d-aa5d-0a5b65777c67)
 
-![image](https://github.com/user-attachments/assets/d425f4fd-536b-4323-b706-812f918acc17)
+![image](https://github.com/user-attachments/assets/105821ec-3e19-4d80-84a2-5a739cd225c4)
 
+![image](https://github.com/user-attachments/assets/52deadc4-891b-4cc3-a19e-234ee7e2fded)
 
-![image](https://github.com/user-attachments/assets/3a3439e0-5baa-4180-9f1b-3289d970eeab)
 
 
 # 注意事项
