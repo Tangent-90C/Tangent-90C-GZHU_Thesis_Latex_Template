@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e} % 声明需要的 LaTeX 版本
-\ProvidesClass{广州大学毕业论文模板}[2025/05/02 v1.3 广州大学毕业论文模板] % 定义文档类名称和版本
+\ProvidesClass{广州大学毕业论文模板}[2025/05/28 v1.3 广州大学毕业论文模板] % 定义文档类名称和版本
 
 
 \RequirePackage{ifplatform}
@@ -35,7 +35,6 @@
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{ifthen}
 \RequirePackage{amsmath, amsfonts, mathrsfs, latexsym}
@@ -51,8 +50,6 @@
 \RequirePackage[bookmarksnumbered=true,  bookmarksopen=true, hyperindex, plainpages=false]{hyperref}
 \providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
 %\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}
-\RequirePackage{titlesec}
-\RequirePackage{titletoc}
 \RequirePackage{fancyhdr}
 \RequirePackage{caption}
 \RequirePackage{xcolor}
@@ -61,20 +58,25 @@
 \RequirePackage{algorithm}
 \RequirePackage{algorithmic}
 
+\RequirePackage{titlesec}
+\RequirePackage{titletoc}
+\RequirePackage{tocloft}
+% \RequirePackage{etoolbox}
+
+
 
 
 %\headheight=10.26em
 \setlength{\headheight}{0.59in}     %{0.39in}  % 页眉高度
 %\setlength{\headsep}{10pt}     % 页眉与正文的间距
 \setlength{\footskip}{0.69in}    % 页脚基线到页面底部的距离
-
+% \setlength{\baselineskip}{23pt}  % 直接设置行距为 23pt % 这个设置在这没用了
 
 
 \fancyhead[R]{}
 \fancyhead[L]{}
 
 \renewcommand{\headrulewidth}{0pt}
-\renewcommand\contentsname{{\heiti\fontsize{18}{23}\selectfont 目录}}
 \renewcommand\refname{参考文献}
 \renewcommand\indexname{索\hspace{1em}引}
 \renewcommand\figurename{图}
@@ -83,9 +85,6 @@
 
 
 
-\titlecontents{section}[0pt]{\vspace{.5\baselineskip}\bfseries}
-{\thecontentslabel\quad}{}
-{\hspace{.5em}\titlerule*[1em]{$\cdot$}\contentspage}
 \renewcommand{\today}{\number\year 年\number\month 月\number\day 日}
 \def\pgfsysdriver{pgfsys-dvipdfm.def}
 
@@ -255,8 +254,33 @@
 
 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 设置注释
+% 将目录中的引导点从细点点换成Word模板里的粗点点
+
+\renewcommand\contentsname{\hfill {\normalfont\heiti\fontsize{18}{23}\selectfont 目录} \hfill}
+
+\renewcommand{\cftaftertoctitle}{\hfill \vskip 1em} % \vskip 1em是控制标题下方空白
+
+\newcommand\mydot[1]{\scalebox{#1}{…}}
+\renewcommand\cftdot{\mydot{1}} % change the size of dots
+\renewcommand\cftdotsep{0} % change the space between dots
+
+\titlecontents{section}
+    [0pt]
+    {\vspace{.5\baselineskip}}
+    {\bfseries\thecontentslabel\quad}
+    {\bfseries}
+    {\hspace{.5em}\titlerule*[1em]{\cftdot}\contentspage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 设置算法Algorithm的注释
 \renewcommand{\algorithmiccomment}[1]{\hfill $\triangleright$ #1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -299,7 +323,7 @@
 \titleformat{\section}
 {\heiti\centering\fontsize{16pt}{\baselineskip}\selectfont} % 标题格式
 {\thesection} % 编号
-{1em}         % 上方间距
+{1em}         % 编号与标题之间的间距
 {}            % 标题后的额外内容
 
 % 设置 section 标题下方的间距
@@ -307,6 +331,7 @@
 {0pt} % 左侧缩进
 {1\baselineskip} % 上方间距
 {2\baselineskip} % 下方空 2 行
+
 
 
 % 设置 subsection 标题格式
@@ -319,8 +344,9 @@
 % 设置 subsection 标题下方的间距
 \titlespacing*{\subsection}
 {0pt} % 左侧缩进
-{1\baselineskip} % 上方间距
-{1\baselineskip} % 下方空 1 行
+{0.5\baselineskip} % 上方间距
+{0.5\baselineskip} % 下方空 1 行
+
 
 % 设置 subsubsection 标题格式
 \titleformat{\subsubsection}
@@ -420,7 +446,7 @@
 % 定义封面
 \newcommand{\makecover}{
 \begin{titlepage}
-\thispagestyle{fancy} % 启用页脚
+% \thispagestyle{fancy} % 启用页脚
 
 
 \begin{center}
@@ -501,5 +527,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
 \endinput
+
 
