@@ -1,13 +1,44 @@
 \NeedsTeXFormat{LaTeX2e} % 声明需要的 LaTeX 版本
-\ProvidesClass{广州大学毕业论文模板}[2025/05/28 v1.3 广州大学毕业论文模板] % 定义文档类名称和版本
-
+\ProvidesClass{广州大学毕业论文模板}[2025/06/03 v1.4 广州大学毕业论文模板] % 定义文档类名称和版本
 
 \RequirePackage{ifplatform}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置类和根据操作系统加载字体
+% ========== 定义控制变量 ==========
+\newcommand{\@pagestart}{摘要}                % 默认页码起始位置
+\newcommand{\@pagenumpos}{R}                % 默认页码位置（右下角）
+\newif\if@absolutepage   % 声明布尔变量（是否启用绝对页码）
+\@absolutepagefalse      % 默认关闭绝对页码（相对页码模式）
 
-\LoadClass[12pt, a4paper,\CurrentOption]{article} % 这里设置的12pt字号没有用，会被后面的ctex宏包覆盖的
+\newif\if@CoverAsPage   % 声明布尔变量（封面是否算页数）
+\@CoverAsPagefalse      % 默认封面不算页数
+
+% ========== 声明选项 ==========
+% 处理页码位置选项
+\DeclareOption{页码位置=R}{\renewcommand{\@pagenumpos}{R}}
+\DeclareOption{页码位置=C}{\renewcommand{\@pagenumpos}{C}}
+\DeclareOption{页码位置=L}{\renewcommand{\@pagenumpos}{L}}
+
+% 处理正文前页码选项
+\DeclareOption{页码起始位置=封面}{\renewcommand{\@pagestart}{封面}}
+\DeclareOption{页码起始位置=摘要}{\renewcommand{\@pagestart}{摘要}}
+\DeclareOption{页码起始位置=目录}{\renewcommand{\@pagestart}{目录}}
+\DeclareOption{页码起始位置=正文}{\renewcommand{\@pagestart}{正文}}
+
+% 添加绝对页码选项（布尔值）
+\DeclareOption{绝对页码}{\@absolutepagetrue}  % 开启绝对页码
+\DeclareOption{相对页码}{\@absolutepagefalse} % 关闭绝对页码（默认）
+
+% 添加封面是否算页数（布尔值）
+\DeclareOption{封面算入页数}{\@CoverAsPagetrue}  % 开启绝对页码
+\DeclareOption{封面不算入页数}{\@CoverAsPagefalse} % 关闭绝对页码（默认）
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+
+
+\LoadClass[12pt, a4paper]{article} % 这里设置的12pt字号没有用，会被后面的ctex宏包覆盖的
 \RequirePackage[BoldFont,SlantFont,CJKchecksingle,AutoFakeBold=true, AutoFakeSlant=true]{xeCJK} % xeCJK的导入需要在ctex之前
 
 \ifwindows
@@ -60,8 +91,10 @@
 
 \RequirePackage{titlesec}
 \RequirePackage{titletoc}
-\RequirePackage{tocloft}
-% \RequirePackage{etoolbox}
+\RequirePackage[titles]{tocloft}
+\RequirePackage{etoolbox}
+
+
 
 
 
@@ -261,7 +294,8 @@
 
 \renewcommand\contentsname{\hfill {\normalfont\heiti\fontsize{18}{23}\selectfont 目录} \hfill}
 
-\renewcommand{\cftaftertoctitle}{\hfill \vskip 1em} % \vskip 1em是控制标题下方空白
+
+\renewcommand{\cftaftertoctitle}{ \hfill \vskip 1em} % \vskip 1em是控制标题下方空白
 
 \newcommand\mydot[1]{\scalebox{#1}{…}}
 \renewcommand\cftdot{\mydot{1}} % change the size of dots
@@ -273,6 +307,30 @@
     {\bfseries\thecontentslabel\quad}
     {\bfseries}
     {\hspace{.5em}\titlerule*[1em]{\cftdot}\contentspage}
+
+
+% 设置目录的页码
+\ifnum\strcmp{\@pagestart}{目录}=0
+\pretocmd{\tableofcontents}%命令
+{
+  \SetupPageStyle
+}%前缀代码
+{}%如果成功
+{}%如果失败
+\fi
+
+
+% 设置正文的页码
+\ifnum\strcmp{\@pagestart}{正文}=0
+\apptocmd{\tableofcontents}%命令
+{
+  \newpage
+  \SetupPageStyle
+}%前缀代码
+{}%如果成功
+{}%如果失败
+\fi
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -311,7 +369,14 @@
 % 但是学校发的模板的上下页边距为 1 in、左边距为 1.18 in、右边距为 1.02 in
 \pagestyle{fancy}
 \fancyhf{} % 清空默认的页眉和页脚
-\fancyfoot[R]{\thepage} % 在页脚右侧添加页码
+
+\newcommand{\SetupPageStyle}{
+    \if@absolutepage
+    \else
+        \setcounter{page}{1}
+    \fi
+    \fancyfoot[\@pagenumpos]{\thepage} % 添加页码
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -368,7 +433,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 定义title头
 \newcommand{\maketitleinfo}{
+
 	\makeatletter
+    
+    \ifnum\strcmp{\@pagestart}{摘要}=0
+        \SetupPageStyle
+    \fi
+    
 	\begin{center}
 		{
 			\setlength{\parskip}{0pt}%
@@ -445,8 +516,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 定义封面
 \newcommand{\makecover}{
-\begin{titlepage}
-% \thispagestyle{fancy} % 启用页脚
+\ifnum\strcmp{\@pagestart}{封面}=0
+    \SetupPageStyle
+\fi
+
+\if@CoverAsPage
+\else
+    \begin{titlepage}
+\fi
+
+\ifnum\strcmp{\@pagestart}{封面}=0
+    \thispagestyle{fancy} % 启用页脚 
+\fi
 
 
 \begin{center}
@@ -463,7 +544,6 @@
 \vspace*{3.7cm}
 
 {
-
 \begin{adjustwidth}{54pt}{0in}
     \fontsize{16}{24}\selectfont\kaishuGB % 指定字体为楷体三号
     \begin{tabular}{r@{}>{\centering\arraybackslash}p{3.80in}}
@@ -522,7 +602,12 @@
 \vspace{2.5cm}
 
 \end{center}
-\end{titlepage}
+
+\if@CoverAsPage
+\else
+    \end{titlepage}
+\fi
+
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
